@@ -1,0 +1,21 @@
+public class UpdateStudentField {
+    
+    public static void studentEducation(){   
+        
+        //Generate Random Value
+        List<String> randomQualification = new List<String>{'Below Tertiary','Tertiary Graduate','Post Tertiary Graduate'};
+            Integer randomValue = randomQualification.size() -1;
+        Integer numberGenerated = Integer.valueof((Math.random()* randomValue));
+        String randomQualificationAssigned = randomQualification[numberGenerated];
+               
+        //Assign Random Qualification to each Student
+        List<Contact> studentToUpdate = [SELECT id, Name from Contact];
+        List<Contact> studentList = new List<Contact>();
+        for (Contact stud:studentToUpdate){
+            stud.Prior_Qualification__c = randomQualificationAssigned;
+			studentList.add(stud);            
+        }
+        update studentList;
+    }
+
+}
