@@ -1,0 +1,18 @@
+trigger ContactTrigger on Contact (after insert) {
+    
+    List<Student_Course_Enrollment__c> enrollment = new List<Student_Course_Enrollment__c>();
+    
+    if(trigger.isAfter){
+        if(trigger.isInsert){
+            for(Contact newStudent:trigger.new){
+                Student_Course_Enrollment__c enrolled = new Student_Course_Enrollment__c();
+                enrolled.Course__c = 'a00Iw000001gWVyIAM';
+                enrolled.Student__c = newStudent.Id;
+                enrolled.Name = '1';
+                enrollment.add(enrolled);
+            }
+            insert enrollment;            
+        }
+    }
+
+}
