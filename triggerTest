@@ -1,0 +1,21 @@
+@isTest
+public class TestContactTrigger {
+    static testmethod void testTrigger(){
+        Contact newStudent = new Contact();
+        newStudent.FirstName = 'Tom';
+        newStudent.LastName = 'Hill';
+        newStudent.Prior_Qualification__c = 'Below Tertiary';
+        newStudent.Enrolment_Progression__c = 'Advanced';        
+        
+        Test.startTest();
+        insert newStudent;        
+        Student_Course_Enrollment__c studenrolled = [SELECT Course__c, Student__c, Name FROM Student_Course_Enrollment__c where Course__c = 'a00Iw000001gWVyIAM' ];
+        Test.stopTest();
+        
+        system.assertEquals('Mission 6 Semester 1', studenrolled.Name);
+        system.assertEquals('a00Iw000001gWVyIAM', studenrolled.Course__c );
+        system.assertEquals(newStudent.Id, studenrolled.Student__c);        
+        
+    }
+
+}
