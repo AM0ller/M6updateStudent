@@ -1,0 +1,86 @@
+@isTest
+public class StudentTest {
+    
+    public static testmethod void testStudentFields(){
+        Test.startTest();
+        
+        Contact testContact1 = new Contact();
+        testContact1.FirstName = 'TestStudent mytest1';
+        testContact1.LastName = 'abs';
+        testContact1.Prior_Qualification__c = 'Tertiary Post-Graduate';
+        testContact1.Enrolment_Progression__c= 'Extra';
+        insert testContact1;
+        
+        Contact testContact2 = new Contact();
+        testContact2.FirstName = 'TestStudent mytest1';
+        testContact2.LastName = 'abs';
+        testContact2.Prior_Qualification__c = 'Tertiary Post-Graduate';
+        testContact2.Enrolment_Progression__c= 'Extra';
+        insert testContact2;
+        
+        List<Contact> output = EducationUpdate.updateContacts();
+		system.debug('output****'+output);        
+        List<Contact> result = [SELECT Id, Enrolment_Progression__c FROM Contact];
+        
+		system.assertEquals('Advanced', result[0].Enrolment_Progression__c);
+		system.assertEquals('Advanced', result[1].Enrolment_Progression__c);        
+        
+        Test.stopTest();
+    }
+    
+    public static testmethod void testStudentFields2(){
+        Test.startTest();
+        
+        Contact testContact1 = new Contact();
+        testContact1.FirstName = 'TestStudent mytest1';
+        testContact1.LastName = 'abs';
+        testContact1.Prior_Qualification__c = 'Tertiary Graduate';
+        testContact1.Enrolment_Progression__c= 'Extra';
+        insert testContact1;
+        
+        Contact testContact2 = new Contact();
+        testContact2.FirstName = 'TestStudent mytest1';
+        testContact2.LastName = 'abs';
+        testContact2.Prior_Qualification__c = 'Tertiary Graduate';
+        testContact2.Enrolment_Progression__c= 'Extra';
+        insert testContact2;
+        
+        List<Contact> output = EducationUpdate.updateContacts();
+		system.debug('output****'+output);        
+        List<Contact> result = [SELECT Id, Enrolment_Progression__c FROM Contact];
+        
+		system.assertEquals('Ultimate', result[0].Enrolment_Progression__c);
+		system.assertEquals('Ultimate', result[1].Enrolment_Progression__c);        
+        
+        Test.stopTest();
+    } 
+    
+    public static testmethod void testStudentFields3(){
+        Test.startTest();
+        
+        Contact testContact1 = new Contact();
+        testContact1.FirstName = 'TestStudent mytest1';
+        testContact1.LastName = 'abs';
+        testContact1.Prior_Qualification__c = 'Below Tertiary';
+        testContact1.Enrolment_Progression__c= 'Advanced';
+        insert testContact1;
+        
+        Contact testContact2 = new Contact();
+        testContact2.FirstName = 'TestStudent mytest1';
+        testContact2.LastName = 'abs';
+        testContact2.Prior_Qualification__c = 'Below Tertiary';
+        testContact2.Enrolment_Progression__c= 'Advanced';
+        insert testContact2;
+        
+        List<Contact> output = EducationUpdate.updateContacts();
+		system.debug('output****'+output);
+        
+        List<Contact> result = [SELECT Id, Enrolment_Progression__c FROM Contact];
+        
+		system.assertEquals('Extra', result[0].Enrolment_Progression__c);
+        system.assertEquals('Extra', result[1].Enrolment_Progression__c);        
+        
+        Test.stopTest();
+    }
+
+}
